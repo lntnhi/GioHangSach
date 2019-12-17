@@ -37,8 +37,9 @@ public class AdminHDController extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			
-			if (request.getParameter("btnConfirm")!=null) {
-				
+			String maHD = request.getParameter("btnConfirm");
+			if (maHD!=null) {
+				bo.xacNhan(Long.parseLong(maHD));
 			}
 			request.setAttribute("ds", bo.getHD());	
 			RequestDispatcher rd = request.getRequestDispatcher("Admin_HoaDon.jsp");

@@ -30,7 +30,7 @@
                  <span class="icon-bar"></span>
                  <span class="icon-bar"></span>
              </button>
-             <a class="navbar-brand" href="#">Website Name</a>
+             <a class="navbar-brand" href="HienThiSachController">Website Name</a>
          </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -42,12 +42,12 @@
 		    	long tongSoLuong = (long) request.getAttribute("tongSoLuong");
 			    long tongTien = (long) request.getAttribute("tongTien");%>
                  <li>
-                     <a href="/Giohang/Giohang" text-decoration: none;">
+                     <a href="GioHangController" text-decoration: none;">
                          Giỏ Hàng (<%=tongSoLuong %>:<%=tongTien %>)</a>
                  </li>
                  <%} else { %>
                  <li>
-                     <a href="/Giohang/Giohang" text-decoration: none;">
+                     <a href="GioHangController" text-decoration: none;">
                          Giỏ Hàng (0)</a>
                  </li>
                  <%}%>
@@ -61,6 +61,12 @@
 			      } %>
 			      <li>
                      <a href="DangXuatController"><% out.print("Đăng xuất"); %></a>
+                 </li>
+                 <li style="margin: 20px 0 0 250px;"><!-- Tìm kiếm -->
+	                <form action="HienThiSachController" method="post">
+	                	<label style="color:white">Tìm kiếm</lablel> 
+	                	<input type="text" name="txtTimKiem" style="color:black">
+	                </form>
                  </li>
              </ul>
          </div>

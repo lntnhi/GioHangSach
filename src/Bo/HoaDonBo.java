@@ -23,4 +23,8 @@ public class HoaDonBo {
 	public long maHDmax() throws Exception {
 		return dao.maHDmax();
 	}
+	
+	public int xacNhan (long maHD) throws Exception {
+		return dao.xacNhan(maHD);
+	}
 }

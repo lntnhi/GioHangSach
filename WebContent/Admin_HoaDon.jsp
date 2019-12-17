@@ -51,6 +51,7 @@
 		<thead class="thead-dark">
 		    <tr>
 		      <th scope="col">Mã Hóa Đơn</th>
+		      <th scope="col">Mã Khách Hàng</th>
 		      <th scope="col">Ngày Mua</th>
 		      <th scope="col">Trạng Thái</th>
 		    </tr>
@@ -60,6 +61,7 @@
 			for (HoaDonBean hd: ds) {%>
 				<tr>
 					<th scope="row"><a href="AdminCTHDController?maHD=<%=hd.getMaHD() %>"><%=hd.getMaHD() %></a></th>
+					<td><%=hd.getMaKH() %></td>
 					<td><%=hd.getDate() %></td>
 					<td><% if(hd.isDaMua()==true) out.print("Đã chuyển tiền"); 
 						else { %>

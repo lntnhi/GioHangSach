@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import Bean.HoaDonBean;
@@ -51,13 +52,13 @@ public class HoaDonDao {
 	
 	public int them (long maKH) throws Exception {
 		dc.KetNoi();
-		Date date = new Date();
-		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-		String sql = "INSERT INTO hoadon(makh, NgayMua, damua) values (?,?,?)";
+		//Date date = new Date();
+		//java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+		//java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		String sql = "INSERT INTO hoadon(makh, NgayMua, damua) values (?,GETDATE(),?)";
 		PreparedStatement cmd = dc.cn.prepareStatement(sql);
 		cmd.setLong(1, maKH);
-		cmd.setDate(2, sqlDate);
-		cmd.setBoolean(3, false);
+		cmd.setBoolean(2, false);
 		int kq = cmd.executeUpdate();
 		dc.cn.close();
 		return kq;
