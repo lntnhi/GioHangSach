@@ -27,4 +27,24 @@ public class SachBo {
 		}
 		return tam;
 	}
+	
+	public SachBean getSachByMa (String maSach) throws Exception {
+		return dao.getSachByMa(maSach);
+	}
+	
+	public int them (String maSach, String tenSach, long soLuong, long gia, String maLoai, String soTap, String anh, String ngayNhap, String tacGia) throws Exception {
+		return dao.them(maSach, tenSach, soLuong, gia, maLoai, soTap, anh, ngayNhap, tacGia);
+	}
+	
+	public int sua (String maSach, String tenSach, long soLuong, long gia, String maLoai, String soTap, String anh, String ngayNhap, String tacGia) throws Exception {
+		return dao.sua(maSach, tenSach, soLuong, gia, maLoai, soTap, anh, ngayNhap, tacGia);
+	}
+	
+	public int suaNoImg (String maSach, String tenSach, long soLuong, long gia, String maLoai, String soTap, String ngayNhap, String tacGia) throws Exception {
+		return dao.suaNoImg(maSach, tenSach, soLuong, gia, maLoai, soTap, ngayNhap, tacGia);
+	}
+	
+	public int xoa (String maSach) throws Exception {
+		return dao.xoa(maSach);
+	}
 }

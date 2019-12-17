@@ -1,6 +1,9 @@
 eclipse.preferences.version=1
+encoding//WebContent/Admin_QuanLySach.jsp=UTF-8
 encoding//WebContent/vidu.jsp=UTF-8
+encoding//src/Controller/AdminSachController.java=UTF-8
 encoding//src/Controller/GioHangController.java=UTF-8
 encoding//src/Controller/ktController.java=UTF-8
 encoding//src/Controller/testController.java=UTF-8
 encoding//src/Dao/LoaiDao.java=UTF-8
+encoding//src/Dao/SachDao.java=UTF-8

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Bean.KhachHangBean;
 import Bo.GioHangBo;
+import Bo.KhachHangBo;
 import Bo.LoaiBo;
 import Bo.SachBo;
 
@@ -33,31 +35,36 @@ public class ktController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    KhachHangBo bo = new KhachHangBo();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Lấy giá trị từ client gửi lên
 		HttpSession session = request.getSession();
 		String username =  request.getParameter("username");
 		String pass =  request.getParameter("pass");
-		String kt =  request.getParameter("kt");
-		if (username != null) 
-			session.setAttribute("un", username);
-		if (session.getAttribute("un")==null) { 
-			//chạy lần đầu thì mở trang dangnhap.jsp
-			RequestDispatcher rd = request.getRequestDispatcher("DangNhap.jsp");
-			rd.forward(request, response);
-		}
-		else {
-			SachBo bo = new SachBo();
-			LoaiBo loaiBo = new LoaiBo();
-			try {
-				request.setAttribute("ds", bo.getSach());
-				request.setAttribute("dsloai", loaiBo.getLoai());
-			} catch (Exception e) {
-				e.printStackTrace();
+		try {
+			KhachHangBean bean = bo.isExist(username, pass);
+			if (bean!=null) 
+				session.setAttribute("un", bean);
+			if (session.getAttribute("un")==null) { //chạy lần đầu thì mở trang dangnhap.jsp
+				RequestDispatcher rd = request.getRequestDispatcher("DangNhap.jsp");
+				rd.forward(request, response);
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("HienThiSach.jsp");
-			rd.forward(request, response);
-		}		
+			else {
+				SachBo bo = new SachBo();
+				LoaiBo loaiBo = new LoaiBo();
+				try {
+					request.setAttribute("ds", bo.getSach());
+					request.setAttribute("dsloai", loaiBo.getLoai());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				RequestDispatcher rd = request.getRequestDispatcher("HienThiSach.jsp");
+				rd.forward(request, response);
+			}		
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	/**

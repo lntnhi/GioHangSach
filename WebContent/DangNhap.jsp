@@ -13,12 +13,6 @@
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	 <a class="navbar-brand" href="#">WebSiteName</a>
 	  <ul class="navbar-nav">
-	    <li class="nav-item">
-	      <a class="nav-link" href="ktController">Home</a>
-	    </li>
-	    <li class="nav-item">
-	      <a class="nav-link" href="GioHangController">Giỏ Hàng</a>
-	    </li>
 	  </ul>
 	</nav>
 	<form method="post" action="ktController">

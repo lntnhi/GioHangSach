@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Bean.GioHangBean;
+import Bean.KhachHangBean;
+import Bo.CTHDBo;
 import Bo.GioHangBo;
+import Bo.HoaDonBo;
 
 /**
  * Servlet implementation class GioHangController
@@ -33,7 +38,7 @@ public class GioHangController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/**
-		*Thêm sách
+		* Thêm sách
 		*/
 		String maSach = request.getParameter("ma");
 		String tenSach = request.getParameter("ten");
@@ -62,7 +67,7 @@ public class GioHangController extends HttpServlet {
 			rd.forward(request, response);
 		}
 		/**
-		*Sửa số lượng
+		* Sửa số lượng
 		*/
 		GioHangBo bo = (GioHangBo)session.getAttribute("gh");
 		String maAdd = request.getParameter("btnAdd");
@@ -82,7 +87,7 @@ public class GioHangController extends HttpServlet {
 			}		
 		}
 		/**
-		*Xóa
+		* Xóa
 		*/
 		String maDel = request.getParameter("btnDel");
 		if (maDel!= null) {
@@ -94,7 +99,7 @@ public class GioHangController extends HttpServlet {
 			rd.forward(request, response);
 		}
 		/**
-		*Xóa checkbox
+		* Xóa checkbox
 		*/
 		String checkbox[] = request.getParameterValues("checkbox");
 		String delCheckbox = request.getParameter("delCheckbox");
@@ -106,6 +111,30 @@ public class GioHangController extends HttpServlet {
 			request.setAttribute("tongSoLuong", bo.tongSoLuong());
 			RequestDispatcher rd = request.getRequestDispatcher("GioHang.jsp");
 			rd.forward(request, response);
+		}
+		
+		/**
+		 * Đặt mua
+		 */
+		KhachHangBean kh = null;
+		if (session.getAttribute("un")!=null) 
+         	kh = (KhachHangBean)session.getAttribute("un");
+		HoaDonBo hdBo = new HoaDonBo();
+		CTHDBo ctBo = new CTHDBo();
+		String btnBuy = request.getParameter("btnBuy");
+		if (btnBuy!=null) {
+			try {
+				hdBo.them(kh.getMaKH());
+				long maHD = hdBo.maHDmax();
+				for (GioHangBean gh: bo.ds) {
+					ctBo.them(gh.getMaSach(), gh.getSoLuong(), maHD);					
+				}				
+				session.setAttribute("gh", null);
+				RequestDispatcher rd = request.getRequestDispatcher("LichSuController");
+				rd.forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		if (session.getAttribute("gh")==null) {

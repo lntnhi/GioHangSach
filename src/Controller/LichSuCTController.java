@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,20 +9,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import Bo.LoaiBo;
+import Bean.CTHDBean;
+import Bo.CTHDBo;
+import Bo.SachBo;
 
 /**
- * Servlet implementation class AdminLoaiController
+ * Servlet implementation class LichSuCTController
  */
-@WebServlet("/AdminLoaiController")
-public class AdminLoaiController extends HttpServlet {
+@WebServlet("/LichSuCTController")
+public class LichSuCTController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminLoaiController() {
+    public LichSuCTController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,33 +33,19 @@ public class AdminLoaiController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    LoaiBo bo = new LoaiBo();
+    CTHDBo bo = new CTHDBo();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
-			String maLoai = request.getParameter("txtMaLoai");
-			String tenLoai = request.getParameter("txtTenLoai");
-			if (request.getParameter("btnThem")!=null) {
-				int n = bo.them(maLoai, tenLoai);
-				if (n==0) request.setAttribute("kqThem", 0);
-			}
-			if (request.getParameter("btnSua")!=null) {
-				bo.sua(maLoai, tenLoai);
-			}
-			if (request.getParameter("maLoaiChon")!=null) {
-				request.setAttribute("loaiChon", bo.getLoaiByMa(request.getParameter("maLoaiChon")));
-			}
-			if (request.getParameter("maLoaiXoa")!=null) {
-				int n = bo.xoa(request.getParameter("maLoaiXoa"));
-				if (n==0) request.setAttribute("kqXoa", 0);
-			}
-			request.setAttribute("dsLoai", bo.getLoai());
-			RequestDispatcher rd = request.getRequestDispatcher("Admin_QuanLyLoai.jsp");
+			
+			String maHD = request.getParameter("maHD");
+			request.setAttribute("ds", bo.getCTHDByMa(Long.parseLong(maHD)));	
+			RequestDispatcher rd = request.getRequestDispatcher("LichSuCT.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	/**

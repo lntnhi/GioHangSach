@@ -1,16 +1,14 @@
-<%@page import="Bean.KhachHangBean"%>
-<%@page import="java.text.DecimalFormat"%>
-<%@page import="Bean.GioHangBean"%>
+<%@page import="Bean.CTHDBean"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="Bean.KhachHangBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width" />
-    <title>Giỏ Hàng</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="UTF-8">
+	<title>Chi tiết hóa đơn</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -20,7 +18,7 @@
     <link href="Content/shop-homepage.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
          <!-- Brand and toggle get grouped for better mobile display -->
          <div class="navbar-header">
@@ -59,61 +57,42 @@
                  <%} else {
 			      	response.sendRedirect("ktController");
 			      } %>
-			      <li>
-                     <a href="DangXuatController"><% out.print("Đăng xuất"); %></a>
-                 </li>
              </ul>
          </div>
       </div>
-    </nav>
-	<%if (session.getAttribute("gh")!=null) { %>
-<form action="GioHangController" method="post">
-	<div class="container">
+</nav>
+<div class="container">
 	<table class="table">
 		<thead class="thead-dark">
 		    <tr>
-		      <th scope="col" class="text-center">Mã Sách</th>
-		      <th scope="col" class="text-center">Tên Sách</th>
-		      <th scope="col" class="text-center">Tác Giả</th>
-		      <th scope="col" class="text-center">Số Lượng</th>
-		      <th scope="col" class="text-center">Thao tác <button type='submit' class="text-right btn btn-danger" name='delCheckbox' value='Xóa'>Xóa đã chọn</button></th>
-		      <th scope="col" class="text-center">Đơn Giá</th>
-		      <th scope="col" class="text-center">Thành Tiền</th>
+		      <th scope="col"></th>
+		      <th scope="col">Mã CTHD</th>
+		      <th scope="col">Tên Sách</th>
+		      <th scope="col">Số Lượng Mua</th>
+		      <th scope="col">Giá</th>
+		      <th scope="col">Số Tập</th>
+		      <th scope="col">Tác Giả</th>
+		      <th scope="col">Mã Loại</th>
+		      <th scope="col">Mã Hóa Đơn</th>
 		    </tr>
 	  	</thead>
 	  	<tbody>
-		<%ArrayList<GioHangBean> ds = (ArrayList<GioHangBean>) request.getAttribute("ds");
-			for (GioHangBean ht: ds) {%>
+		<%ArrayList<CTHDBean> ds = (ArrayList<CTHDBean>) request.getAttribute("ds");
+			for (CTHDBean hd: ds) {%>
 				<tr>
-					<th scope="row"><input type="checkbox" name='checkbox' value='<%=ht.getMaSach()%>'><%=ht.getMaSach() %></th>
-					<td><%=ht.getTenSach() %></td>
-					<td><%=ht.getTacGia() %></td>
-					<td><%=ht.getSoLuong() %></td>
-					<td>
-						<input type="number" name="number" value="">
-						<button class ="btn btn-primary" type="submit" name="btnAdd" value="<%=ht.getMaSach()%>">Thêm</button>
-						<button class ="btn btn-danger" type="submit" name="btnDel" value="<%=ht.getMaSach()%>">Xóa</button>
-					</td>
-					<td><%=ht.getGia() %></td>
-					<td><%=ht.getThanhTien()%></td>
+					<td><img width = "70px" height = "110px" src="<%=hd.getAnh() %>"></td>
+					<th scope="row"><%=hd.getMaCTHD() %></th>
+					<td><%=hd.getTenSach() %></td>
+					<td><%=hd.getSoLuongMua() %></td>
+					<td><%=hd.getGia() %></td>
+					<td><%=hd.getSoTap() %></td>
+					<td><%=hd.getTacGia() %></td>
+					<td><%=hd.getMaLoai() %></td>
+					<td><%=hd.getMaHD() %></td>
 				</tr>
-			<%}
-			DecimalFormat dd = new DecimalFormat("###,###");%>
-			<div class="text-right font-italic">
-			<% long tongTien = (long) request.getAttribute("tongTien");
-			out.print("Tổng tiền: <b>"+ dd.format(tongTien) + "</b>"); %>
-			</div>
-		<%} else {%>
-			<h5 class="text-center mt-5">Giỏ hàng trống!</h5>
-			<%}%>
+			<%} %>
 		</tbody>
 	</table>
-	</div>
-	<%if (session.getAttribute("gh")!=null) { %>
-	<div class="container clearfix">
-		<button type='submit' class="text-right btn btn-primary pull-right" name='btnBuy' value='buy'>Đặt hàng</button>
-	</div>	
-	<%} %>
-</form>
+</div>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<%@page import="Bean.KhachHangBean"%>
 <%@page import="Bean.SachBean"%>
 <%@page import="Bean.LoaiBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -39,27 +40,31 @@
                  <li>
                      <a href="HienThiSachController">Home</a>
                  </li>
-                 <% if (session.getAttribute("un")!=null) { %>
-                 <li>
-                     <a href="#"><% out.print(session.getAttribute("un")); %></a>
-                 </li>
-                 <%} else {
-			      	response.sendRedirect("ktController");
-			      } %>
 			    <%if (session.getAttribute("gh")!=null) { 
 		    	long tongSoLuong = (long) request.getAttribute("tongSoLuong");
 			    long tongTien = (long) request.getAttribute("tongTien");%>
                  <li>
-                     <a href="GioHangController" style="color: white; font-weight: bold; text-decoration: none;">
-                         <img src="images/giohang.gif" />Giỏ Hàng (<%=tongSoLuong %>:<%=tongTien %>)</a>
+                     <a href="GioHangController" text-decoration: none;">
+                         Giỏ Hàng (<%=tongSoLuong %>:<%=tongTien %>)</a>
                  </li>
                  <%} else { %>
                  <li>
-                     <a href="GioHangController" style="color: white; font-weight: bold; text-decoration: none;">
-                         <img src="images/giohang.gif" />Giỏ Hàng (0)</a>
+                     <a href="GioHangController" text-decoration: none;">
+                         Giỏ Hàng (0)</a>
                  </li>
                  <%}%>
-                 <li style="margin: 20px 0 0 300px;"><!-- Tìm kiếm -->
+                 <% if (session.getAttribute("un")!=null) { 
+                 	KhachHangBean bean = (KhachHangBean)session.getAttribute("un");%>
+                 <li>
+                     <a href="LichSuController"><% out.print("Lịch sử mua hàng"); %></a>
+                 </li>
+                 <%} else {
+			      	response.sendRedirect("ktController");
+			      } %>
+			      <li>
+                     <a href="DangXuatController"><% out.print("Đăng xuất"); %></a>
+                 </li>
+                 <li style="margin: 20px 0 0 250px;"><!-- Tìm kiếm -->
 	                <form action="HienThiSachController" method="post">
 	                	<label style="color:white">Tìm kiếm</lablel> 
 	                	<input type="text" name="txtTimKiem" style="color:black">
@@ -129,7 +134,7 @@
                             <div class="thumbnail">
                             <form method="post" action="GioHangController?ma=<%=sach.getMaSach()%>&ten=<%=sach.getTenSach()%>&tacgia=<%=sach.getTacGia()%>&gia=<%=sach.getGia()%>">
                             	<button type = "submit">
-                            		<img alt="<%=sach.getTenSach() %>" src="<%=sach.getAnh() %>" style="height:280px" />
+                            		<img alt="<%=sach.getTenSach() %>" src="<%=sach.getAnh() %>" style="height:280px; width:244px" />
                                     <div><br/>
                                         <h4 style="text-align:center; margin: 0; height:30px"><%=sach.getTenSach() %></h4>
                                         <p></p>

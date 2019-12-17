@@ -7,6 +7,10 @@ public class GioHangBean {
 	private Long gia;
 	private Long soLuong;
 	private Long thanhTien;
+
+	public GioHangBean() {
+		super();
+	}
 	public GioHangBean(String maSach, String tenSach, String tacGia, Long gia, Long soLuong) {
 		super();
 		this.maSach = maSach;
@@ -15,9 +19,6 @@ public class GioHangBean {
 		this.gia = gia;
 		this.soLuong = soLuong;
 		this.thanhTien = gia * soLuong;
-	}
-	public GioHangBean() {
-		super();
 	}
 
 	public String getMaSach() {
