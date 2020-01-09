@@ -1,3 +1,4 @@
+<%@page import="Bean.LichSuBean"%>
 <%@page import="Bean.KhachHangBean"%>
 <%@page import="Bean.HoaDonBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -75,17 +76,24 @@
 		<thead class="thead-dark">
 		    <tr>
 		      <th scope="col">Mã Hóa Đơn</th>
+		      <th scope="col">Tổng Số Lượng</th>
+		      <th scope="col">Thành Tiền</th>
 		      <th scope="col">Ngày Mua</th>
 		      <th scope="col">Trạng Thái</th>
 		    </tr>
 	  	</thead>
 	  	<tbody>
-		<%ArrayList<HoaDonBean> ds = (ArrayList<HoaDonBean>) request.getAttribute("ds");
-			for (HoaDonBean hd: ds) {%>
+		<%ArrayList<LichSuBean> ds = (ArrayList<LichSuBean>) request.getAttribute("ds");
+			for (LichSuBean ls: ds) {%>
 				<tr>
-					<th scope="row"><a href="LichSuCTController?maHD=<%=hd.getMaHD() %>"><%=hd.getMaHD() %></a></th>
-					<td><%=hd.getDate() %></td>
-					<td><% if(hd.isDaMua()==true) out.print("Đã chuyển tiền"); else out.print("Chưa chuyển tiền"); %></td>
+					<th scope="row"><a href="LichSuCTController?maHD=<%=ls.getMaHD() %>"><%=ls.getMaHD() %></a></th>
+					<td><%=ls.getTongSL() %></td>
+					<td><%=ls.getThanhTien() %></td>
+					<td><%=ls.getNgayMua() %></td>
+					<td><% if(ls.isDaMua()==true) out.print("Đã xác nhận"); else {%>
+						<span class="text-danger">Chưa xác nhận</span>
+					<%} %>
+					</td>
 				</tr>
 			<%} %>
 		</tbody>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import Bean.KhachHangBean;
 import Bo.HoaDonBo;
+import Bo.LichSuBo;
 
 /**
  * Servlet implementation class LichSuController
@@ -32,6 +33,7 @@ public class LichSuController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     HoaDonBo bo = new HoaDonBo();
+    LichSuBo lsBo = new LichSuBo();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			HttpSession session = request.getSession();
@@ -41,7 +43,7 @@ public class LichSuController extends HttpServlet {
 			KhachHangBean kh = null;
 			if (session.getAttribute("un")!=null) 
 	         	kh = (KhachHangBean)session.getAttribute("un");
-			request.setAttribute("ds", bo.getHDByKH(kh.getMaKH()));	
+			request.setAttribute("ds", lsBo.getLS(kh.getMaKH()));	
 			RequestDispatcher rd = request.getRequestDispatcher("LichSu.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {

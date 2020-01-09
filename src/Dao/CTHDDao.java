@@ -70,4 +70,14 @@ public class CTHDDao {
 		dc.cn.close();
 		return kq;
 	}
+	
+	public int xoa (long maCTHD) throws Exception {
+		dc.KetNoi();
+		String sql = "DELETE FROM ChiTietHoaDon WHERE MaChiTietHD = ?";
+		PreparedStatement cmd = dc.cn.prepareStatement(sql);
+		cmd.setLong(1, maCTHD);
+		int kq = cmd.executeUpdate();
+		dc.cn.close();
+		return kq;
+	}
 }

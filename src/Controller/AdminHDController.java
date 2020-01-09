@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import Bean.KhachHangBean;
 import Bo.HoaDonBo;
+import Bo.XNDMBo;
 
 /**
  * Servlet implementation class AdminHDController
@@ -32,6 +33,7 @@ public class AdminHDController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     HoaDonBo bo = new HoaDonBo();
+    XNDMBo xndmBo = new XNDMBo();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -41,7 +43,7 @@ public class AdminHDController extends HttpServlet {
 			if (maHD!=null) {
 				bo.xacNhan(Long.parseLong(maHD));
 			}
-			request.setAttribute("ds", bo.getHD());	
+			request.setAttribute("ds", xndmBo.getXNDM());	
 			RequestDispatcher rd = request.getRequestDispatcher("Admin_HoaDon.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {

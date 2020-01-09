@@ -19,4 +19,8 @@ CTHDDao dao = new CTHDDao();
 	public int them (String maSach, long soLuongMua, long maHD) throws Exception {
 		return dao.them(maSach, soLuongMua, maHD);
 	}
+	
+	public int xoa (long maCTHD) throws Exception {
+		return dao.xoa(maCTHD);
+	}
 }

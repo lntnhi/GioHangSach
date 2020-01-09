@@ -1,3 +1,4 @@
+<%@page import="Bean.XNDMBean"%>
 <%@page import="Bean.HoaDonBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -52,22 +53,22 @@
 		    <tr>
 		      <th scope="col">Mã Hóa Đơn</th>
 		      <th scope="col">Mã Khách Hàng</th>
-		      <th scope="col">Ngày Mua</th>
+		      <th scope="col">Họ Tên</th>
+		      <th scope="col">Tổng Số Lượng</th>
+		      <th scope="col">Thành Tiền</th>
 		      <th scope="col">Trạng Thái</th>
 		    </tr>
 	  	</thead>
 	  	<tbody>
-		<%ArrayList<HoaDonBean> ds = (ArrayList<HoaDonBean>) request.getAttribute("ds");
-			for (HoaDonBean hd: ds) {%>
+		<%ArrayList<XNDMBean> ds = (ArrayList<XNDMBean>) request.getAttribute("ds");
+			for (XNDMBean hd: ds) {%>
 				<tr>
 					<th scope="row"><a href="AdminCTHDController?maHD=<%=hd.getMaHD() %>"><%=hd.getMaHD() %></a></th>
 					<td><%=hd.getMaKH() %></td>
-					<td><%=hd.getDate() %></td>
-					<td><% if(hd.isDaMua()==true) out.print("Đã chuyển tiền"); 
-						else { %>
-						<a href="AdminHDController?btnConfirm=<%=hd.getMaHD() %>" class="btn btn-primary mr-2">Xác nhận</a>
-						<%} %>
-					</td>
+					<td><%=hd.getHoTen() %></td>
+					<td><%=hd.getTongSL() %></td>
+					<td><%=hd.getThanhTien() %></td>
+					<td><a href="AdminHDController?btnConfirm=<%=hd.getMaHD() %>" class="btn btn-primary mr-2">Xác nhận</a></td>
 				</tr>
 			<%} %>
 		</tbody>

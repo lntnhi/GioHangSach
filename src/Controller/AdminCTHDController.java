@@ -35,6 +35,15 @@ public class AdminCTHDController extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			
+			String maXoa = request.getParameter("maXoa");
+			if (maXoa!=null) {
+				String maHDX = request.getParameter("maHDX");
+				bo.xoa(Long.parseLong(maXoa));
+				request.setAttribute("ds", bo.getCTHDByMa(Long.parseLong(maHDX)));	
+				RequestDispatcher rd = request.getRequestDispatcher("Admin_CTHD.jsp");
+				rd.forward(request, response);
+			}
+			
 			String maHD = request.getParameter("maHD");
 			request.setAttribute("ds", bo.getCTHDByMa(Long.parseLong(maHD)));	
 			RequestDispatcher rd = request.getRequestDispatcher("Admin_CTHD.jsp");

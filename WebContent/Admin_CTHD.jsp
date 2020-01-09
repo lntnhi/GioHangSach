@@ -50,7 +50,6 @@
 	<table class="table">
 		<thead class="thead-dark">
 		    <tr>
-		      <th scope="col"></th>
 		      <th scope="col">Mã CTHD</th>
 		      <th scope="col">Tên Sách</th>
 		      <th scope="col">Số Lượng Mua</th>
@@ -58,14 +57,14 @@
 		      <th scope="col">Số Tập</th>
 		      <th scope="col">Tác Giả</th>
 		      <th scope="col">Mã Loại</th>
-		      <th scope="col">Mã Hóa Đơn</th>
+		      <th scope="col">Ảnh</th>
+		      <th scope="col"></th>
 		    </tr>
 	  	</thead>
 	  	<tbody>
 		<%ArrayList<CTHDBean> ds = (ArrayList<CTHDBean>) request.getAttribute("ds");
 			for (CTHDBean hd: ds) {%>
 				<tr>
-					<td><img width = "70px" height = "110px" src="<%=hd.getAnh() %>"></td>
 					<th scope="row"><%=hd.getMaCTHD() %></th>
 					<td><%=hd.getTenSach() %></td>
 					<td><%=hd.getSoLuongMua() %></td>
@@ -73,7 +72,8 @@
 					<td><%=hd.getSoTap() %></td>
 					<td><%=hd.getTacGia() %></td>
 					<td><%=hd.getMaLoai() %></td>
-					<td><%=hd.getMaHD() %></td>
+					<td><img width = "70px" height = "110px" src="<%=hd.getAnh() %>"></td>
+					<td><a href="AdminCTHDController?maXoa=<%=hd.getMaCTHD()%>&maHDX=<%=hd.getMaHD() %>" class="btn btn-danger">Xóa</a></td>
 				</tr>
 			<%} %>
 		</tbody>
